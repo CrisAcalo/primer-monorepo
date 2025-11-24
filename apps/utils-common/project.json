@@ -1,0 +1,26 @@
+{
+  "name": "utils-common",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/utils-common/src",
+  "projectType": "library",
+  "tags": ["scope:utils"],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/utils-common",
+        "main": "apps/utils-common/src/index.ts",
+        "tsConfig": "apps/utils-common/tsconfig.lib.json",
+        "assets": ["apps/utils-common/*.md"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/utils-common/jest.config.ts"
+      }
+    }
+  }
+}

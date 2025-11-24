@@ -1,26 +1,26 @@
 {
-  "name": "primer-monorepo",
+  "name": "app2",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "prefix": "app",
-  "sourceRoot": "apps/primer-monorepo/src",
-  "tags": [],
+  "sourceRoot": "apps/app2/src",
+  "tags": ["scope:app"],
   "targets": {
     "build": {
       "executor": "@angular/build:application",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/primer-monorepo",
-        "browser": "apps/primer-monorepo/src/main.ts",
+        "outputPath": "dist/apps/app2",
+        "browser": "apps/app2/src/main.ts",
         "polyfills": ["zone.js"],
-        "tsConfig": "apps/primer-monorepo/tsconfig.app.json",
+        "tsConfig": "apps/app2/tsconfig.app.json",
         "assets": [
           {
             "glob": "**/*",
-            "input": "apps/primer-monorepo/public"
+            "input": "apps/app2/public"
           }
         ],
-        "styles": ["apps/primer-monorepo/src/styles.css"]
+        "styles": ["apps/app2/src/styles.css"]
       },
       "configurations": {
         "production": {
@@ -50,14 +50,14 @@
       "continuous": true,
       "executor": "@angular/build:dev-server",
       "options":{
-        "port": 4202
+        "port": 4201
       },
       "configurations": {
         "production": {
-          "buildTarget": "primer-monorepo:build:production"
+          "buildTarget": "app2:build:production"
         },
         "development": {
-          "buildTarget": "primer-monorepo:build:development"
+          "buildTarget": "app2:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -65,7 +65,7 @@
     "extract-i18n": {
       "executor": "@angular/build:extract-i18n",
       "options": {
-        "buildTarget": "primer-monorepo:build"
+        "buildTarget": "app2:build"
       }
     },
     "lint": {
@@ -75,16 +75,16 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/primer-monorepo/jest.config.ts",
-        "tsConfig": "apps/primer-monorepo/tsconfig.spec.json"
+        "jestConfig": "apps/app2/jest.config.ts",
+        "tsConfig": "apps/app2/tsconfig.spec.json"
       }
     },
     "serve-static": {
       "continuous": true,
       "executor": "@nx/web:file-server",
       "options": {
-        "buildTarget": "primer-monorepo:build",
-        "staticFilePath": "dist/apps/primer-monorepo/browser",
+        "buildTarget": "app2:build",
+        "staticFilePath": "dist/apps/app2/browser",
         "spa": true
       }
     }

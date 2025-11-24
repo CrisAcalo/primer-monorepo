@@ -42,6 +42,16 @@
           "codeCoverage": true
         }
       }
+    },
+    "@nx/js:tsc": {
+      "cache": true,
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
+    },
+    "@nx/esbuild:esbuild": {
+      "cache": true,
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
     }
   },
   "generators": {
@@ -50,6 +60,46 @@
       "linter": "eslint",
       "style": "css",
       "unitTestRunner": "jest"
+    },
+    "@nx/angular:library": {
+      "linter": "eslint",
+      "unitTestRunner": "jest"
+    },
+    "@nx/angular:component": {
+      "style": "css"
     }
-  }
+  },
+    "projects": {
+    "app1": { "tags": ["scope:app"] },
+    "app2": { "tags": ["scope:app"] },
+    "ui-shared": { "tags": ["scope:ui"] },
+    "utils-common": { "tags": ["scope:utils"] },
+    "server": { "tags": ["scope:api"] }
+  },
+  "dependencyConstraints": [
+    {
+      "sourceTag": "scope:utils",
+      "onlyDependOnLibsWithTags": ["scope:utils"]
+    },
+    {
+      "sourceTag": "scope:ui",
+      "onlyDependOnLibsWithTags": ["scope:utils", "scope:ui"]
+    },
+    {
+      "sourceTag": "scope:api",
+      "onlyDependOnLibsWithTags": ["scope:utils"]
+    },
+    {
+      "sourceTag": "scope:app",
+      "onlyDependOnLibsWithTags": ["scope:utils", "scope:ui", "scope:api"]
+    }
+  ],
+  "plugins": [
+    {
+      "plugin": "@nx/eslint/plugin",
+      "options": {
+        "targetName": "eslint:lint"
+      }
+    }
+  ]
 }
